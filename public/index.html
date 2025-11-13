@@ -8,20 +8,56 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       height: 100vh;
+      background: #f2f2f2;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       font-family: sans-serif;
-      background: #f0f0f0;
+      text-align: center;
+      padding: 20px;
     }
     h1 {
       font-size: 3em;
-      color: #333;
-      text-align: center;
+      margin-bottom: 20px;
+    }
+    #counter {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 5px;
+    }
+    button:hover {
+      background: #0056b3;
     }
   </style>
 </head>
 <body>
   <h1>Thank You</h1>
+  <div id="counter">Visits: 0</div>
+  <button onclick="resetCounter()">Reset</button>
+
+  <script>
+    const key = 'visit-counter';
+    let count = parseInt(localStorage.getItem(key)) || 0;
+
+    // Increment on each load
+    count += 1;
+    localStorage.setItem(key, count);
+    document.getElementById('counter').textContent = `Visits: ${count}`;
+
+    // Reset function
+    function resetCounter() {
+      localStorage.setItem(key, 0);
+      document.getElementById('counter').textContent = `Visits: 0`;
+    }
+  </script>
 </body>
 </html>
